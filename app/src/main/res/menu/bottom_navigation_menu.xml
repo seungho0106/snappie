@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <item-->
-<!--        android:id="@+id/page_1"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@dr"-->
-<!--        android:title="@string/text_label_1"/>-->
-<!--    <item-->
-<!--        android:id="@+id/page_2"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/icon_2"-->
-<!--        android:title="@string/text_label_2"/>-->
+    <item
+        android:id="@+id/fragment_album"
+        android:enabled="true"
+        android:icon="@drawable/ic_photo_library_black_24dp"
+        android:title="@string/menu_label_album"/>
+    <item
+        android:id="@+id/fragment_camera"
+        android:enabled="true"
+        android:icon="@drawable/ic_photo_camera_black_24dp"
+        android:title="@string/menu_label_camera"/>
+    <item
+        android:id="@+id/fragment_explore"
+        android:enabled="true"
+        android:icon="@drawable/ic_explore_black_24dp"
+        android:title="@string/menu_label_explore"/>
 </menu>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Snappie</string>
+    <string name="menu_label_camera">Camera</string>
+    <string name="menu_label_album">Album</string>
+    <string name="menu_label_explore">Explore</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
