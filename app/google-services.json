@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1027562674544",
+    "firebase_url": "https://snappie-8a727.firebaseio.com",
+    "project_id": "snappie-8a727",
+    "storage_bucket": "snappie-8a727.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027562674544:android:278c1c9416775be7b417b5",
+        "android_client_info": {
+          "package_name": "ca.bcit.comp3717.snappie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027562674544-hnpdalroaa0iqgbupidlq45hqdc6cent.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.bcit.comp3717.snappie",
+            "certificate_hash": "a80ce70b1dc803546a244aa8a4a9022f25826e1c"
+          }
+        },
+        {
+          "client_id": "1027562674544-ovt4ptdpada1clfgcu7u80l6n08de2i2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWrAgDraODgKjOSD9dZgXP_rEKeWAW1BU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027562674544-ovt4ptdpada1clfgcu7u80l6n08de2i2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
