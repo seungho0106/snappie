@@ -1,21 +1,24 @@
 package ca.bcit.comp3717.snappie;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
@@ -43,7 +46,7 @@ public class ExploreFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ImageView imageViewTest;
+    private LocalDateTime localDateTime;
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     /**
      * Use this factory method to create a new instance of
@@ -74,6 +77,7 @@ public class ExploreFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        localDateTime = LocalDateTime.now();
     }
 
     @Override
@@ -82,16 +86,74 @@ public class ExploreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        // Write ImageView to firebase example
-        imageViewTest = view.findViewById(R.id.imageViewTest);
-        imageViewTest.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                writeImageViewToFirebase(imageViewTest);
-            }
+        Button loadPreviousButton = view.findViewById(R.id.btnLoadPrevious);
+        loadPreviousButton.setOnClickListener(v -> {
+            populateExploreDatePrevious(inflater, view);
         });
 
+        // Populate explore dates // 3 days worth initially
+        populateExploreDate(localDateTime, inflater, view);
+        for (int i = 0; i < 2; i++) {
+            populateExploreDatePrevious(inflater, view);
+        }
+
         return view;
+    }
+
+    private void populateExploreDatePrevious(LayoutInflater inflater, View view) {
+        localDateTime = localDateTime.minusHours(24);
+        populateExploreDate(localDateTime, inflater, view);
+    }
+
+    private void populateExploreDate(LocalDateTime exploreDateTime, LayoutInflater inflater, View view) {
+        String exploreDateString = getStoragePath(exploreDateTime);
+        String theme = Themes.themes.get(exploreDateString);
+
+        if (theme == null) {
+            Toast.makeText(getContext(), "End of the list.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LinearLayout linearLayoutExplore = view.findViewById(R.id.linearLayoutExplore);
+
+        View dayListView = inflater.inflate(R.layout.linear_layout_explore_day, null, false);
+        linearLayoutExplore.addView(dayListView);
+
+        TextView tvTitle = dayListView.findViewById(R.id.textViewTheme);
+        tvTitle.setText(theme);
+        TextView tvDate = dayListView.findViewById(R.id.textViewDate);
+        tvDate.setText(exploreDateString);
+
+        StorageReference listRef = firebaseStorage.getReference().child(exploreDateString);
+        listRef.listAll()
+                .addOnSuccessListener(listResult -> {
+                    // Get list of storage references of all images in the specified path
+                    for (StorageReference item : listResult.getItems()) {
+                        View snapView = inflater.inflate(R.layout.image_view_snap, null, false);
+                        ImageView imageView = snapView.findViewById(R.id.imageViewSnap);
+                        setImageFromFirebaseToImageView(imageView, item);
+
+                        LinearLayout linearLayoutSnaps = dayListView.findViewById(R.id.linearLayoutSnaps);
+                        linearLayoutSnaps.addView(snapView);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle error
+                    }
+                });
+    }
+
+    private void setImageFromFirebaseToImageView(ImageView imageView, StorageReference item) {
+        // All the items under listRef.
+        final long ONE_MEGABYTE = 1024 * 1024;
+        item.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(), imageView.getHeight(), false));
+        }).addOnFailureListener(exception -> {
+            // Handle any errors
+        });
     }
 
     private void writeImageViewToFirebase(ImageView imageView) {
@@ -107,7 +169,7 @@ public class ExploreFragment extends Fragment {
         byte[] data = outputStream.toByteArray();
 
         // Create upload task
-        String path = getStoragePath() + "/" + UUID.randomUUID() + ".png";
+        String path = getStoragePath(LocalDateTime.now()) + "/" + UUID.randomUUID() + ".png";
         StorageReference storageReference = firebaseStorage.getReference(path);
         StorageMetadata metadata = new StorageMetadata.Builder()
                 .setCustomMetadata("caption", "some caption here")
@@ -115,19 +177,14 @@ public class ExploreFragment extends Fragment {
         UploadTask uploadTask = storageReference.putBytes(data, metadata);
 
         // Handle success
-        uploadTask.addOnCompleteListener(getActivity(), new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                Toast.makeText(getContext(), "Test.", Toast.LENGTH_LONG).show();
-            }
-        });
+        uploadTask.addOnCompleteListener(getActivity(), task ->
+                Toast.makeText(getContext(), "Shared snap!.", Toast.LENGTH_LONG).show());
     }
 
     /* Creates proper path the image is stored in the firebase, according to today's date.
     * IE. if today's date is 11/24/2020, the image should be stored in directory /11.24.2020/ */
-    private String getStoragePath() {
+    private String getStoragePath(LocalDateTime localDateTime) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        return dtf.format(now).replace("/", ".");
+        return dtf.format(localDateTime).replace("/", ".");
     }
 }
