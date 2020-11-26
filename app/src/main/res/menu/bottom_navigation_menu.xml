@@ -3,16 +3,16 @@
     <item
         android:id="@+id/fragment_album"
         android:enabled="true"
-        android:icon="@drawable/ic_photo_library_black_24dp"
+        android:icon="@drawable/ic_photo_library"
         android:title="@string/menu_label_album"/>
     <item
         android:id="@+id/fragment_camera"
         android:enabled="true"
-        android:icon="@drawable/ic_photo_camera_black_24dp"
+        android:icon="@drawable/ic_photo_camera"
         android:title="@string/menu_label_camera"/>
     <item
         android:id="@+id/fragment_explore"
         android:enabled="true"
-        android:icon="@drawable/ic_explore_black_24dp"
+        android:icon="@drawable/ic_explore"
         android:title="@string/menu_label_explore"/>
 </menu>
