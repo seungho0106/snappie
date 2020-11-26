@@ -144,7 +144,7 @@ public class CameraFragment extends Fragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String path = CameraFragment.this.requireContext().getExternalFilesDirs(
+                String path = CameraFragment.this.requireContext().getExternalFilesDir(
                         Environment.DIRECTORY_PICTURES)
                         .toString();
                 File file = new File(path + "/" + System.currentTimeMillis() + ".png");
