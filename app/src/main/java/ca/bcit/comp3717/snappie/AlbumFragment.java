@@ -2,6 +2,7 @@ package ca.bcit.comp3717.snappie;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -67,9 +68,12 @@ public class AlbumFragment extends Fragment {
     }
 
     private void setImage(String imagePath) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90F);
         progressBar.setVisibility(View.VISIBLE);
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        albumImage.setImageBitmap(bitmap);
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap,0, 0, bitmap.getWidth(), bitmap.getHeight(),   matrix, true);
+        albumImage.setImageBitmap(newBitmap);
         progressBar.setVisibility(View.GONE);
     }
 }
