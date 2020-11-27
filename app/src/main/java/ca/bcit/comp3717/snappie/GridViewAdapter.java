@@ -14,6 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +40,7 @@ public class GridViewAdapter extends ArrayAdapter<String> {
 
     private static class ViewHolder {
         ImageView image;
+        ProgressBar progressBar;
     }
 
     @NonNull
@@ -45,14 +51,36 @@ public class GridViewAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(layoutResource, parent, false);
             holder = new ViewHolder();
             holder.image = convertView.findViewById(R.id.image);
+            holder.progressBar = convertView.findViewById(R.id.progress_bar);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        String imagePath = getItem(position);
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        holder.image.setImageBitmap(bitmap);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        String imagePath = "file:/" + getItem(position);
+        imageLoader.displayImage(imagePath, holder.image, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+                holder.progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                holder.progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                holder.progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+                holder.progressBar.setVisibility(View.GONE);
+            }
+
+        });
         return convertView;
     }
 }
