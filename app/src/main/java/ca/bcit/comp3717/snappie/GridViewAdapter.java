@@ -3,6 +3,7 @@ package ca.bcit.comp3717.snappie;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +52,11 @@ public class GridViewAdapter extends ArrayAdapter<String> {
         }
 
         String imagePath = getItem(position);
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90F);
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        holder.image.setImageBitmap(bitmap);
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap,0, 0, bitmap.getWidth(), bitmap.getHeight(),   matrix, true);
+        holder.image.setImageBitmap(newBitmap);
         return convertView;
     }
 }

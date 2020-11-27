@@ -156,34 +156,9 @@ public class ExploreFragment extends Fragment {
         });
     }
 
-    private void writeImageViewToFirebase(ImageView imageView) {
-        // Generate data
-        Bitmap capture = Bitmap.createBitmap(
-                imageView.getWidth(),
-                imageView.getHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas captureCanvas = new Canvas(capture);
-        imageView.draw(captureCanvas);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        capture.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        byte[] data = outputStream.toByteArray();
-
-        // Create upload task
-        String path = getStoragePath(LocalDateTime.now()) + "/" + UUID.randomUUID() + ".png";
-        StorageReference storageReference = firebaseStorage.getReference(path);
-        StorageMetadata metadata = new StorageMetadata.Builder()
-                .setCustomMetadata("caption", "some caption here")
-                .build();
-        UploadTask uploadTask = storageReference.putBytes(data, metadata);
-
-        // Handle success
-        uploadTask.addOnCompleteListener(getActivity(), task ->
-                Toast.makeText(getContext(), "Shared snap!.", Toast.LENGTH_LONG).show());
-    }
-
     /* Creates proper path the image is stored in the firebase, according to today's date.
     * IE. if today's date is 11/24/2020, the image should be stored in directory /11.24.2020/ */
-    private String getStoragePath(LocalDateTime localDateTime) {
+    static public String getStoragePath(LocalDateTime localDateTime) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         return dtf.format(localDateTime).replace("/", ".");
     }

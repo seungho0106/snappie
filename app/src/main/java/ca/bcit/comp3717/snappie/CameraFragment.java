@@ -14,6 +14,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -97,6 +99,11 @@ public class CameraFragment extends Fragment {
         imageButton = view.findViewById(R.id.imgCapture);
         switchCam = view.findViewById(R.id.switch_cam);
 
+        // Set today's theme
+        String exploreDateString = ExploreFragment.getStoragePath(LocalDateTime.now());
+        String theme = Themes.themes.get(exploreDateString);
+        TextView tvThemeToday = view.findViewById(R.id.textViewThemeToday);
+        tvThemeToday.setText(String.format("%s%s", getString(R.string.todaysTheme), theme));
 
         if (allPermissionsGranted()) {
             startCamera(); //start camera if permission has been granted by user
@@ -153,7 +160,7 @@ public class CameraFragment extends Fragment {
                 imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
                     @Override
                     public void onImageSaved(@NonNull File file) {
-                        String msg = "Pic captured at " + file.getAbsolutePath();
+                        String msg = "Snapped!";
                         Toast.makeText(CameraFragment.this.getContext(), msg, Toast.LENGTH_LONG).show();
                     }
 
