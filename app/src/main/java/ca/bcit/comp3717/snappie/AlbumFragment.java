@@ -130,7 +130,7 @@ public class AlbumFragment extends Fragment {
 
         // Handle success
         uploadTask.addOnCompleteListener(getActivity(), task ->
-                Toast.makeText(getContext(), "Shared snap!.", Toast.LENGTH_LONG).show());
+                Toast.makeText(getContext(), "Shared snap!", Toast.LENGTH_LONG).show());
     }
 
     private void setImage(String imagePath) {

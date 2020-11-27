@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/menu_label_explore"
+        android:text="@string/menu_label_album"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,13 +41,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -60,14 +60,15 @@
 
             <TextView
                 android:id="@+id/textViewThemeAlbum"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnUpload"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="#F4F4F4"
             android:text="@string/share" />
     </LinearLayout>
 

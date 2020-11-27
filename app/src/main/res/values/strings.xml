@@ -7,4 +7,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="explore_load_more">Load previous</string>
     <string name="share">Share</string>
+    <string name="todaysTheme">Today\'s theme: \</string>
 </resources>
