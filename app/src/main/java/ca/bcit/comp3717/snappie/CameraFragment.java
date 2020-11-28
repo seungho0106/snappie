@@ -87,7 +87,6 @@ public class CameraFragment extends Fragment {
 
             try {
                 // Only bind use cases if we can query a camera with this orientation
-//                CameraX.getCameraWithLensFacing(cameraLensFacing);
                 bindCameraUseCases();
             } catch (Exception e) {
                 Toast.makeText(
