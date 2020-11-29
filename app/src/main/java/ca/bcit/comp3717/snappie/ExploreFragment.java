@@ -104,8 +104,8 @@ public class ExploreFragment extends Fragment {
 
     private void setImageFromFirebaseToImageView(ImageView imageView, StorageReference item) {
         // All the items under listRef.
-        final long ONE_MEGABYTE = 1024 * 1024;
-        item.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+        final long FIVE_MEGABYTE = 1024 * 1024 * 5;
+        item.getBytes(FIVE_MEGABYTE).addOnSuccessListener(bytes -> {
             Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             imageView.setImageBitmap(bmp);
 //            imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(), imageView.getHeight(), false));
