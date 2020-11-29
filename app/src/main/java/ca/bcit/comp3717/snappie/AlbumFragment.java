@@ -114,7 +114,7 @@ public class AlbumFragment extends Fragment {
         Canvas captureCanvas = new Canvas(capture);
         albumImage.draw(captureCanvas);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        capture.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        capture.compress(Bitmap.CompressFormat.PNG, 70, outputStream);
         byte[] data = outputStream.toByteArray();
 
         // Create upload task
