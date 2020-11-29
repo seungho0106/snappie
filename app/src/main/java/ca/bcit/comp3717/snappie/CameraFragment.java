@@ -63,7 +63,7 @@ public class CameraFragment extends Fragment {
         String exploreDateString = ExploreFragment.getStoragePath(LocalDateTime.now());
         String theme = Themes.themes.get(exploreDateString);
         TextView tvThemeToday = view.findViewById(R.id.textViewThemeToday);
-        tvThemeToday.setText(String.format("%s%s", getString(R.string.todaysTheme), theme));
+        tvThemeToday.setText(String.format("%s%s", getString(R.string.todaysTheme), theme).toUpperCase());
 
         if (allPermissionsGranted()) {
             startCamera(); //start camera if permission has been granted by user
