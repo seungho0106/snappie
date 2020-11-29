@@ -26,7 +26,6 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:padding="20dp" />
-
     </ScrollView>
 
     <Button
@@ -38,6 +37,7 @@
         android:backgroundTint="#F4F4F4"
         android:fontFamily="@font/fsex"
         android:text="@string/explore_load_more"
+        android:textColor="@color/colorText"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

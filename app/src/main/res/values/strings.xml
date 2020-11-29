@@ -12,7 +12,8 @@
     <string name="imgCaptureDesc">Capture image</string>
     <string name="camFragSnackBarTex">Snapped!</string>
     <string name="album_no_image_placeholder">No picture to display.\nPlease take a snap!</string>
+    <string name="dashed_separator">-----------------------------------------------------------------------------------------</string>
+    <string name="no_snaps_today">No snaps on this day :(</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="dashed_separator">-------------------------------------------------------</string>
 </resources>

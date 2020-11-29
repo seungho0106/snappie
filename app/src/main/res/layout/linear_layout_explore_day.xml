@@ -72,6 +72,19 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:baselineAligned="false"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewNoSnaps"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/fsex"
+                android:text="@string/no_snaps_today"
+                android:textColor="@color/colorText"
+                android:textSize="20sp" />
+
+        </LinearLayout>
     </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

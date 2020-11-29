@@ -17,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -82,6 +84,11 @@ public class ExploreFragment extends Fragment {
         StorageReference listRef = firebaseStorage.getReference().child(exploreDateString);
         listRef.listAll()
                 .addOnSuccessListener(listResult -> {
+                    // Hide no snap text if there are results
+                    if (!listResult.getItems().isEmpty()) {
+                        TextView textView = dayListView.findViewById(R.id.textViewNoSnaps);
+                        textView.setVisibility(View.GONE);
+                    }
                     // Get list of storage references of all images in the specified path
                     for (StorageReference item : listResult.getItems()) {
                         View snapView = inflater.inflate(R.layout.image_view_snap, null, false);
@@ -91,9 +98,6 @@ public class ExploreFragment extends Fragment {
                         LinearLayout linearLayoutSnaps = dayListView.findViewById(R.id.linearLayoutSnaps);
                         linearLayoutSnaps.addView(snapView);
                     }
-                })
-                .addOnFailureListener(e -> {
-                    // Handle error
                 });
     }
 
