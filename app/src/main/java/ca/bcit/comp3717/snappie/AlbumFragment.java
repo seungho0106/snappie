@@ -93,8 +93,8 @@ public class AlbumFragment extends Fragment {
     public void writeImageViewToFirebase() {
         // Generate data
         Bitmap capture = Bitmap.createBitmap(
-                albumImage.getWidth(),
-                albumImage.getHeight(),
+                (int) (albumImage.getWidth() * 0.5),
+                (int) (albumImage.getHeight() * 0.5),
                 Bitmap.Config.ARGB_8888);
         Canvas captureCanvas = new Canvas(capture);
         albumImage.draw(captureCanvas);
