@@ -94,11 +94,8 @@ public class ExploreFragment extends Fragment {
                         linearLayoutSnaps.addView(snapView);
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle error
-                    }
+                .addOnFailureListener(e -> {
+                    // Handle error
                 });
     }
 
