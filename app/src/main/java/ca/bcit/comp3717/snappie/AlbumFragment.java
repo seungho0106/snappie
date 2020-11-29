@@ -1,5 +1,6 @@
 package ca.bcit.comp3717.snappie;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
@@ -31,6 +33,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.UUID;
 
 public class AlbumFragment extends Fragment {
@@ -60,7 +63,7 @@ public class AlbumFragment extends Fragment {
         placeholder = view.findViewById(R.id.placeholder);
         gridView = view.findViewById(R.id.gv_album);
 
-        shareButton.setOnClickListener(v -> writeImageViewToFirebase());
+        shareButton.setOnClickListener(v -> showShareDialog());
         setupGridView();
 
         return view;
@@ -70,7 +73,7 @@ public class AlbumFragment extends Fragment {
         Log.d(TAG, "getPhotos() started!");
         String directory = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString();
         ArrayList<String> imagePaths = FileSearch.getFilePaths(directory);
-        Collections.reverse(imagePaths);
+        Collections.sort(imagePaths, (o1, o2) -> o2.compareTo(o1));
 
         GridViewAdapter gridViewAdapter = new GridViewAdapter(getContext(), R.layout.item_album_grid, imagePaths);
         gridView.setAdapter(gridViewAdapter);
@@ -90,7 +93,19 @@ public class AlbumFragment extends Fragment {
         imageDate.setText(storagePath);
     }
 
-    public void writeImageViewToFirebase() {
+    private void showShareDialog() {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+        builder
+                .setTitle("Share this picture?")
+                .setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.dismiss())
+                .setPositiveButton(getResources().getString(R.string.yes), ((dialog, which) -> {
+                    writeImageViewToFirebase();
+                    dialog.dismiss();
+                }))
+                .show();
+    }
+
+    private void writeImageViewToFirebase() {
         // Generate data
         Bitmap capture = Bitmap.createBitmap(
                 albumImage.getWidth(),
