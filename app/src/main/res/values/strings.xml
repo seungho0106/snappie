@@ -9,4 +9,5 @@
     <string name="switchCamDesc">Switch Camera</string>
     <string name="imgCaptureDesc">Capture image</string>
     <string name="camFragSnackBarTex">Snapped!</string>
+    <string name="album_no_image_placeholder">No picture to display.\nPlease take a snap!</string>
 </resources>

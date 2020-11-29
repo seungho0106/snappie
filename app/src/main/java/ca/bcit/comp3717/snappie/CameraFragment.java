@@ -2,7 +2,6 @@ package ca.bcit.comp3717.snappie;
 
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;

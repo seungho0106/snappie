@@ -68,6 +68,19 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/album_no_image_placeholder"
+            android:fontFamily="@font/fsex"
+            android:textColor="@color/colorText"
+            android:textSize="24sp"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
     <GridView

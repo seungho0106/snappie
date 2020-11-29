@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -32,6 +30,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 public class AlbumFragment extends Fragment {
@@ -42,6 +41,7 @@ public class AlbumFragment extends Fragment {
     private ImageButton shareButton;
     private ImageView albumImage;
     private ProgressBar progressBar;
+    private TextView placeholder;
     private GridView gridView;
 
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
@@ -57,6 +57,7 @@ public class AlbumFragment extends Fragment {
         shareButton = view.findViewById(R.id.btn_share);
         albumImage = view.findViewById(R.id.iv_album);
         progressBar = view.findViewById(R.id.pb_album);
+        placeholder = view.findViewById(R.id.placeholder);
         gridView = view.findViewById(R.id.gv_album);
 
         shareButton.setOnClickListener(v -> writeImageViewToFirebase());
@@ -69,12 +70,17 @@ public class AlbumFragment extends Fragment {
         Log.d(TAG, "getPhotos() started!");
         String directory = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString();
         ArrayList<String> imagePaths = FileSearch.getFilePaths(directory);
+        Collections.reverse(imagePaths);
 
         GridViewAdapter gridViewAdapter = new GridViewAdapter(getContext(), R.layout.item_album_grid, imagePaths);
         gridView.setAdapter(gridViewAdapter);
         gridView.setOnItemClickListener((parent, view, position, id) -> setImage("file:/" + imagePaths.get(position)));
 
-        setImage("file:/" + imagePaths.get(0));
+        if (imagePaths.size() > 0) {
+            setImage("file:/" + imagePaths.get(0));
+        } else {
+            placeholder.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setImageInfo(String imagePath) {

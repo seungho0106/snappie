@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -67,7 +67,7 @@ public class ExploreFragment extends Fragment {
         String theme = Themes.themes.get(exploreDateString);
 
         if (theme == null) {
-            Toast.makeText(getContext(), "End of the list.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), "End of the list.", Snackbar.LENGTH_SHORT).show();
             return;
         }
 
