@@ -93,13 +93,13 @@ public class AlbumFragment extends Fragment {
     public void writeImageViewToFirebase() {
         // Generate data
         Bitmap capture = Bitmap.createBitmap(
-                (int) (albumImage.getWidth() * 0.5),
-                (int) (albumImage.getHeight() * 0.5),
+                albumImage.getWidth(),
+                albumImage.getHeight(),
                 Bitmap.Config.ARGB_8888);
         Canvas captureCanvas = new Canvas(capture);
         albumImage.draw(captureCanvas);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        capture.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        capture.compress(Bitmap.CompressFormat.PNG, 70, outputStream);
         byte[] data = outputStream.toByteArray();
 
         // Create upload task
