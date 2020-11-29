@@ -5,15 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:fontFamily="@font/fsex"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="--------------------------------------------------------------------------------------------------------------------------------"
+        android:textColor="@color/colorText"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintBottom_toTopOf="@id/line2">
 
         <TextView
             android:id="@+id/textViewTheme"
@@ -33,16 +46,26 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/line2"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:fontFamily="@font/fsex"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="--------------------------------------------------------------------------------------------------------------------------------"
+        android:textColor="@color/colorText"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/line2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayoutSnaps"
@@ -51,17 +74,4 @@
             android:baselineAligned="false"
             android:orientation="horizontal"/>
     </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/fsex"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:text="--------------------------------------------------------------------------------------------------------------------------------"
-        android:textColor="@color/colorText"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
