@@ -67,8 +67,7 @@ public class CameraFragment extends Fragment {
         if (allPermissionsGranted()) {
             startCamera(); //start camera if permission has been granted by user
         } else {
-            ActivityCompat.requestPermissions(
-                    requireActivity(),
+            requestPermissions(
                     REQUIRED_PERMISSIONS,
                     REQUEST_CODE_PERMISSIONS);
         }
