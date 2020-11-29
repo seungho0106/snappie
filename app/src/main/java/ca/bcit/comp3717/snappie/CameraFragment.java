@@ -108,7 +108,6 @@ public class CameraFragment extends Fragment {
             imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
                 @Override
                 public void onImageSaved(@NonNull File file) {
-//                        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
                     Log.d(TAG, getView().toString());
                     Snackbar snackbar = Snackbar.make(
                             getView(),
