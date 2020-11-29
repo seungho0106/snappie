@@ -3,7 +3,9 @@
     <string name="menu_label_camera">Camera</string>
     <string name="menu_label_album">Album</string>
     <string name="menu_label_explore">Explore</string>
-    <string name="explore_load_more">Load previous</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="explore_load_more">SEE MORE</string>
     <string name="share">Share</string>
     <string name="todaysTheme">Theme: \</string>
     <string name="switchCamDesc">Switch Camera</string>
