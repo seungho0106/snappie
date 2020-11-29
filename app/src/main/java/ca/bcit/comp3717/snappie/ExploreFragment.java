@@ -88,7 +88,7 @@ public class ExploreFragment extends Fragment {
                 .addOnSuccessListener(listResult -> {
                     // Hide no snap text if there are results
                     if (!listResult.getItems().isEmpty()) {
-                        TextView textView = view.findViewById(R.id.textViewNoSnaps);
+                        TextView textView = dayListView.findViewById(R.id.textViewNoSnaps);
                         textView.setVisibility(View.GONE);
                     }
                     // Get list of storage references of all images in the specified path
