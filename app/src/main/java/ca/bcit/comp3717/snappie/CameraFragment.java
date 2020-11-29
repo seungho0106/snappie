@@ -2,11 +2,13 @@ package ca.bcit.comp3717.snappie;
 
 import android.content.pm.PackageManager;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Rational;
 import android.util.Size;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
@@ -109,7 +111,14 @@ public class CameraFragment extends Fragment {
                     String msg = "Snapped!";
 //                        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
                     Log.d(TAG, getView().toString());
-                    Snackbar.make(getView(), msg, Snackbar.LENGTH_SHORT).show();
+                    Snackbar snackbar = Snackbar.make(getView(), msg, Snackbar.LENGTH_SHORT);
+                    View sbView = snackbar.getView();
+                    TextView sbTextView = (TextView) sbView.findViewById(
+                            com.google.android.material.R.id.snackbar_text
+                    );
+                    sbTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+                    sbTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    snackbar.show();
                 }
 
                 @Override
