@@ -10,7 +10,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 public class UniversalImageLoader {
 
-    private static final int defaultImage = R.drawable.ic_launcher_foreground;
+    private static final int defaultImage = R.mipmap.ic_launcher_foreground;
     private Context context;
 
     public UniversalImageLoader(Context context) {
@@ -25,6 +25,7 @@ public class UniversalImageLoader {
                 .cacheOnDisk(true)
                 .cacheInMemory(true)
                 .resetViewBeforeLoading(true)
+                .considerExifParams(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .displayer(new FadeInBitmapDisplayer(300))
                 .build();
