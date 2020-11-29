@@ -7,7 +7,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="explore_load_more">Load previous</string>
     <string name="share">Share</string>
-    <string name="todaysTheme">Today\'s theme: \</string>
+    <string name="todaysTheme">Theme: \</string>
     <string name="switchCamDesc">Switch Camera</string>
     <string name="imgCaptureDesc">Capture image</string>
     <string name="camFragSnackBarTex">Snapped!</string>

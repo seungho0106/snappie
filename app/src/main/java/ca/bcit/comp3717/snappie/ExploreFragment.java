@@ -120,7 +120,7 @@ public class ExploreFragment extends Fragment {
         linearLayoutExplore.addView(dayListView);
 
         TextView tvTitle = dayListView.findViewById(R.id.textViewTheme);
-        tvTitle.setText(theme);
+        tvTitle.setText(theme.toUpperCase());
         TextView tvDate = dayListView.findViewById(R.id.textViewDate);
         tvDate.setText(exploreDateString);
 

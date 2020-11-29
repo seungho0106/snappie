@@ -17,13 +17,19 @@
         <TextView
             android:id="@+id/textViewTheme"
             android:layout_width="260dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fsex"
+            android:textColor="@color/colorText"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd" />
+            android:fontFamily="@font/fsex"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorText"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <HorizontalScrollView
